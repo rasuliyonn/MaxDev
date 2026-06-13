@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  name          String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Project {
+  id            String    @id @default(cuid())
+  title         String
+  description   String
+  image         String?
+  category      String
+  technologies  String    @default("[]")
+  siteUrl       String?
+  githubUrl     String?
+  featured      Boolean   @default(false)
+  order         Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Review {
+  id            String    @id @default(cuid())
+  name          String
+  avatar        String?
+  text          String
+  rating        Int       @default(5)
+  company       String?
+  order         Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Service {
+  id            String    @id @default(cuid())
+  title         String
+  description   String
+  icon          String?
+  items         String    @default("[]")
+  order         Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model SiteSettings {
+  id            String    @id @default("main")
+  companyName   String    @default("MaxDev")
+  description   String    @default("")
+  telegram      String    @default("")
+  whatsapp      String    @default("")
+  email         String    @default("")
+  github        String    @default("")
+  phone         String    @default("")
+  address       String    @default("")
+  updatedAt     DateTime  @updatedAt
+}
+
+model ContactRequest {
+  id            String    @id @default(cuid())
+  name          String
+  telegram      String?
+  email         String?
+  message       String
+  read          Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+}
