@@ -36,6 +36,13 @@ async function main() {
     },
   });
 
+  // Skip seeding if data already exists
+  const existingProjects = await prisma.project.count();
+  if (existingProjects > 0) {
+    console.log("Data already exists, skipping seed.");
+    return;
+  }
+
   // Seed sample projects
   const projects = [
     {
