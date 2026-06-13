@@ -7,14 +7,14 @@ async function main() {
   // Create admin user
   const hashedPassword = crypto
     .createHash("sha256")
-    .update(process.env.ADMIN_PASSWORD || "admin123")
+    .update(process.env.ADMIN_PASSWORD || "Q1w2qwe3")
     .digest("hex");
 
   await prisma.user.upsert({
-    where: { email: process.env.ADMIN_EMAIL || "admin@example.com" },
-    update: {},
+    where: { email: process.env.ADMIN_EMAIL || "codebymax" },
+    update: { password: hashedPassword },
     create: {
-      email: process.env.ADMIN_EMAIL || "admin@example.com",
+      email: process.env.ADMIN_EMAIL || "codebymax",
       password: hashedPassword,
       name: "Admin",
     },
