@@ -7,16 +7,6 @@ export const authConfig: NextAuthConfig = {
     signIn: "/admin/login",
   },
   callbacks: {
-    authorized({ auth, request }) {
-      const isAdminRoute = request.nextUrl.pathname.startsWith("/admin");
-      const isLoginPage = request.nextUrl.pathname === "/admin/login";
-
-      if (isAdminRoute && !isLoginPage && !auth) {
-        return false;
-      }
-
-      return true;
-    },
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
